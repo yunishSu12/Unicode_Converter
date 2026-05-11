@@ -1,181 +1,281 @@
 import Link from 'next/link';
-import { ArrowLeft, Heart, Globe, Code } from 'lucide-react';
+import { ArrowLeft, Heart, Code, Shield, Zap, Globe, Users } from 'lucide-react';
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Navigation */}
-      <nav className="border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Converter
+      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-xl font-bold text-primary hover:opacity-80 transition-opacity">
+            UniPreeti
           </Link>
+          <div className="flex gap-6 text-sm">
+            <Link href="/how-to-use" className="hover:text-primary transition-colors">
+              How to Use
+            </Link>
+            <Link href="/faq" className="hover:text-primary transition-colors">
+              FAQ
+            </Link>
+            <Link href="/about" className="text-primary font-medium">
+              About
+            </Link>
+          </div>
         </div>
       </nav>
 
-      {/* Content */}
-      <article className="max-w-4xl mx-auto px-4 py-12 prose prose-gray dark:prose-invert">
-        <h1>About UniPreeti</h1>
-        
-        <p className="lead">
-          UniPreeti was born from a simple observation: thousands of valuable Nepali documents remain trapped in legacy Preeti encoding, inaccessible to modern digital platforms and future generations.
-        </p>
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 py-12">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Converter
+        </Link>
 
-        <h2>The Problem We're Solving</h2>
-        
-        <p>
-          For over two decades, Nepali computer users relied on font-based encoding systems like Preeti to type in Nepali. Government offices drafted policies, schools created educational materials, lawyers prepared legal documents, and writers published books—all using Preeti font. These documents represent an enormous repository of Nepali knowledge, culture, and administrative history.
-        </p>
-
-        <p>
-          However, Preeti is not Unicode-compliant. This creates serious problems:
-        </p>
-
-        <ul>
-          <li>Documents don't display correctly on websites without the Preeti font installed</li>
-          <li>Mobile devices can't render Preeti text properly</li>
-          <li>Search engines can't index or search Preeti content</li>
-          <li>Screen readers for visually impaired users can't read Preeti text</li>
-          <li>Cloud platforms and modern software don't support font-based encoding</li>
-          <li>Long-term digital preservation is at risk</li>
-        </ul>
-
-        <p>
-          Meanwhile, Unicode Nepali has become the international standard, supported natively by all modern operating systems, browsers, and devices. The gap between legacy Preeti documents and Unicode-based modern systems needed a bridge.
-        </p>
-
-        <h2>Our Mission</h2>
-
-        <div className="bg-primary/10 border-l-4 border-primary p-6 rounded-r-lg my-8">
-          <p className="text-lg font-medium mb-2">
-            To make Nepali digital content accessible, searchable, and future-proof by providing fast, accurate, and privacy-respecting conversion tools.
-          </p>
-          <p className="text-sm text-muted-foreground mb-0">
-            We believe that language technology should empower communities, not create barriers.
+        <div className="space-y-4 mb-12">
+          <h1 className="text-4xl font-bold">About UniPreeti</h1>
+          <p className="text-lg text-muted-foreground">
+            Bridging the gap between legacy Preeti documents and modern Unicode Nepali text.
           </p>
         </div>
 
-        <h2>Why UniPreeti is Different</h2>
-
-        <div className="grid md:grid-cols-3 gap-6 not-prose my-8">
-          <div className="space-y-3">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+        {/* Mission Statement */}
+        <div className="p-8 rounded-lg border bg-card shadow-sm mb-12">
+          <div className="flex items-start gap-4 mb-6">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
               <Heart className="w-6 h-6 text-primary" />
             </div>
-            <h3 className="font-semibold text-lg">Privacy-First</h3>
-            <p className="text-sm text-muted-foreground">
-              All conversion happens in your browser. Your documents never touch our servers. Perfect for sensitive legal, government, or personal files.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <Globe className="w-6 h-6 text-primary" />
+            <div>
+              <h2 className="text-2xl font-semibold mb-3">Our Mission</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                UniPreeti was created to solve a critical problem facing the Nepali digital community: the need to convert millions of legacy Preeti font documents into modern, accessible Unicode format. We believe that Nepali digital content should be accessible to everyone, on every device, without barriers.
+              </p>
             </div>
-            <h3 className="font-semibold text-lg">Accessible</h3>
-            <p className="text-sm text-muted-foreground">
-              Free forever, no registration, no ads, no tracking. Works on any device with a web browser. Built for everyone.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <Code className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold text-lg">Accurate</h3>
-            <p className="text-sm text-muted-foreground">
-              Advanced rule-based engine handles complex Nepali typography including conjuncts, matras, and special characters.
-            </p>
           </div>
         </div>
 
-        <h2>Who We Serve</h2>
+        {/* The Problem */}
+        <div className="space-y-6 mb-12">
+          <h2 className="text-3xl font-bold">The Problem We're Solving</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            For over two decades, Nepali computer users relied on the Preeti font for digital Nepali text. Government offices, educational institutions, legal firms, publishing houses, and countless individuals created millions of documents using this legacy encoding system. While Preeti served its purpose well in the pre-Unicode era, it has significant limitations in today's interconnected digital world.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Preeti documents cannot be properly displayed on modern websites without special fonts installed. They don't work on mobile devices, can't be indexed by search engines, aren't accessible to screen readers, and create compatibility issues across different platforms. This has created a digital divide, where valuable Nepali content remains trapped in an outdated format.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Unicode Nepali, on the other hand, is the international standard that works seamlessly everywhere—from smartphones to government portals, from social media to cloud documents. Converting from Preeti to Unicode is essential for digital preservation, accessibility, and the future of Nepali content online.
+          </p>
+        </div>
 
-        <p>
-          UniPreeti is designed for the entire Nepali-speaking community:
-        </p>
+        {/* Our Solution */}
+        <div className="space-y-6 mb-12">
+          <h2 className="text-3xl font-bold">Our Solution</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            UniPreeti provides fast, accurate, and completely private conversion between Unicode Nepali and Preeti encoding. Unlike other converters that require uploading your documents to external servers, UniPreeti runs entirely in your web browser. This means:
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Shield className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Complete Privacy</h3>
+              <p className="text-sm text-muted-foreground">
+                Your sensitive documents—legal contracts, government records, personal letters—never leave your computer. Zero data collection, zero tracking.
+              </p>
+            </div>
 
-        <ul>
-          <li><strong>Government Offices:</strong> Digitize legacy records and make them accessible on modern web portals</li>
-          <li><strong>Educational Institutions:</strong> Convert old teaching materials and research documents to Unicode</li>
-          <li><strong>Legal Professionals:</strong> Modernize legal documents while maintaining confidentiality</li>
-          <li><strong>Publishers & Media:</strong> Repurpose archived content for digital platforms</li>
-          <li><strong>Designers:</strong> Work with legacy Preeti files in modern design workflows</li>
-          <li><strong>Students & Researchers:</strong> Access historical documents for academic work</li>
-          <li><strong>Libraries & Archives:</strong> Preserve cultural heritage in future-proof formats</li>
-          <li><strong>Individual Users:</strong> Convert personal documents, letters, and creative writing</li>
-        </ul>
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Zap className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Lightning Fast</h3>
+              <p className="text-sm text-muted-foreground">
+                Real-time conversion as you type. Process thousands of characters instantly without any server delays or waiting times.
+              </p>
+            </div>
 
-        <h2>Our Commitment</h2>
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Code className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Advanced Algorithm</h3>
+              <p className="text-sm text-muted-foreground">
+                Handles complex Nepali typography including conjuncts, vowel signs, half-forms, and special positioning rules accurately.
+              </p>
+            </div>
 
-        <p>
-          UniPreeti will always remain:
-        </p>
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Globe className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Works Everywhere</h3>
+              <p className="text-sm text-muted-foreground">
+                Compatible with all modern browsers and devices. Works on desktop, mobile, and tablet without any installation.
+              </p>
+            </div>
+          </div>
+        </div>
 
-        <ul>
-          <li><strong>Free:</strong> No premium tiers, no paywalls, no hidden costs</li>
-          <li><strong>Private:</strong> Client-side processing, no data collection, no tracking</li>
-          <li><strong>Open:</strong> Transparent about how we work and what we do</li>
-          <li><strong>Community-Driven:</strong> Built for Nepali speakers, by people who care about Nepali digital content</li>
-        </ul>
+        {/* Who We Serve */}
+        <div className="space-y-6 mb-12">
+          <h2 className="text-3xl font-bold">Who We Serve</h2>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            UniPreeti is built for everyone in the Nepali community who works with digital text:
+          </p>
 
-        <h2>The Technology</h2>
+          <div className="space-y-4">
+            <div className="flex gap-4 p-4 rounded-lg bg-muted/50">
+              <Users className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">Government Offices</h3>
+                <p className="text-sm text-muted-foreground">
+                  Digitize and modernize legacy Preeti documents for web portals, digital archives, and e-governance initiatives.
+                </p>
+              </div>
+            </div>
 
-        <p>
-          UniPreeti is built with modern web technologies:
-        </p>
+            <div className="flex gap-4 p-4 rounded-lg bg-muted/50">
+              <Users className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">Educational Institutions</h3>
+                <p className="text-sm text-muted-foreground">
+                  Convert textbooks, research papers, and educational materials to Unicode for online learning platforms and digital libraries.
+                </p>
+              </div>
+            </div>
 
-        <ul>
-          <li><strong>Next.js 15:</strong> Fast, SEO-friendly React framework</li>
-          <li><strong>TypeScript:</strong> Type-safe code for reliability</li>
-          <li><strong>Client-Side Processing:</strong> All conversion happens in your browser using JavaScript</li>
-          <li><strong>Rule-Based Engine:</strong> Comprehensive character mapping and reordering algorithms</li>
-          <li><strong>Responsive Design:</strong> Works seamlessly on desktop, tablet, and mobile</li>
-        </ul>
+            <div className="flex gap-4 p-4 rounded-lg bg-muted/50">
+              <Users className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">Legal Professionals</h3>
+                <p className="text-sm text-muted-foreground">
+                  Preserve and convert legal documents, court records, and contracts while maintaining complete confidentiality.
+                </p>
+              </div>
+            </div>
 
-        <p>
-          The conversion engine uses carefully crafted mapping dictionaries and rule-based algorithms to handle the complexities of Nepali script, including conjunct characters, vowel sign positioning, and special cases that make Nepali typography unique.
-        </p>
+            <div className="flex gap-4 p-4 rounded-lg bg-muted/50">
+              <Users className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">Publishers & Designers</h3>
+                <p className="text-sm text-muted-foreground">
+                  Convert old Preeti layouts to Unicode for modern publishing workflows, websites, and digital media.
+                </p>
+              </div>
+            </div>
 
-        <h2>Looking Forward</h2>
+            <div className="flex gap-4 p-4 rounded-lg bg-muted/50">
+              <Users className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">Content Creators</h3>
+                <p className="text-sm text-muted-foreground">
+                  Repurpose old Preeti content for blogs, social media, YouTube descriptions, and modern web platforms.
+                </p>
+              </div>
+            </div>
 
-        <p>
-          This is just the beginning. We're actively working on new features including:
-        </p>
+            <div className="flex gap-4 p-4 rounded-lg bg-muted/50">
+              <Users className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">Libraries & Archives</h3>
+                <p className="text-sm text-muted-foreground">
+                  Preserve cultural heritage by converting historical Preeti documents to future-proof Unicode format.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <ul>
-          <li>Support for .docx and other document formats</li>
-          <li>Batch conversion for multiple files</li>
-          <li>Browser extension for quick conversion</li>
-          <li>Offline Progressive Web App (PWA) mode</li>
-          <li>Support for other legacy Nepali fonts (Kantipur, etc.)</li>
-          <li>API for developers</li>
-        </ul>
+        {/* Our Values */}
+        <div className="space-y-6 mb-12">
+          <h2 className="text-3xl font-bold">Our Values</h2>
+          
+          <div className="grid gap-6">
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <h3 className="font-semibold text-xl mb-2">Privacy First</h3>
+              <p className="text-muted-foreground">
+                We believe your data belongs to you. That's why UniPreeti never collects, stores, or transmits your text. All processing happens locally in your browser.
+              </p>
+            </div>
 
-        <h2>Join Us</h2>
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <h3 className="font-semibold text-xl mb-2">Always Free</h3>
+              <p className="text-muted-foreground">
+                Access to language tools should never be behind a paywall. UniPreeti is free for everyone—individuals, businesses, and institutions—with no hidden costs or premium tiers.
+              </p>
+            </div>
 
-        <p>
-          UniPreeti is more than a tool—it's a contribution to preserving and modernizing Nepali digital heritage. Whether you're a user who benefits from the converter, a developer who wants to contribute code, or someone who wants to spread the word, you're part of this mission.
-        </p>
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <h3 className="font-semibold text-xl mb-2">Open Source</h3>
+              <p className="text-muted-foreground">
+                We believe in transparency and community collaboration. UniPreeti's code is open source, allowing developers to learn from, improve, and integrate our conversion engine.
+              </p>
+            </div>
 
-        <p>
-          Together, we can ensure that decades of Nepali digital content remains accessible for generations to come.
-        </p>
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <h3 className="font-semibold text-xl mb-2">Community Driven</h3>
+              <p className="text-muted-foreground">
+                Built by the Nepali community, for the Nepali community. We listen to feedback, fix bugs quickly, and continuously improve based on real user needs.
+              </p>
+            </div>
+          </div>
+        </div>
 
-        <div className="bg-muted p-6 rounded-lg mt-12">
-          <h3 className="mt-0">Ready to Convert?</h3>
-          <p className="mb-4">
-            Start converting your Nepali text between Unicode and Preeti right now.
+        {/* Technology */}
+        <div className="space-y-6 mb-12">
+          <h2 className="text-3xl font-bold">Technology</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            UniPreeti is built with modern web technologies to ensure speed, reliability, and accessibility:
+          </p>
+          <ul className="space-y-2 text-muted-foreground">
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span><strong>Next.js 14:</strong> React framework for optimal performance and SEO</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span><strong>TypeScript:</strong> Type-safe code for reliability and maintainability</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span><strong>Tailwind CSS:</strong> Modern, responsive design that works on all devices</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span><strong>Client-side Processing:</strong> All conversion happens in your browser using JavaScript</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span><strong>Advanced Algorithms:</strong> Rule-based conversion engine handling complex Nepali typography</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-12 p-8 rounded-lg bg-primary/5 border border-primary/20 text-center">
+          <h2 className="text-2xl font-semibold mb-3">Ready to Convert?</h2>
+          <p className="text-muted-foreground mb-6">
+            Join thousands of users who trust UniPreeti for their Nepali text conversion needs.
           </p>
           <Link 
             href="/" 
-            className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-colors no-underline"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
           >
-            Go to Converter
+            Start Converting Now
           </Link>
         </div>
-      </article>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t mt-20">
+        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
+          <p>© 2026 UniPreeti. Built with ❤️ for the Nepali community.</p>
+          <p className="mt-2">
+            Open source • Privacy-first • Always free
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

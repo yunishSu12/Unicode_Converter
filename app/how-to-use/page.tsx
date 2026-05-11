@@ -1,124 +1,234 @@
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Upload, Download, Copy, RefreshCw, FileText, Keyboard } from 'lucide-react';
 
 export default function HowToUse() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Navigation */}
-      <nav className="border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Converter
+      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-xl font-bold text-primary hover:opacity-80 transition-opacity">
+            UniPreeti
           </Link>
+          <div className="flex gap-6 text-sm">
+            <Link href="/how-to-use" className="text-primary font-medium">
+              How to Use
+            </Link>
+            <Link href="/faq" className="hover:text-primary transition-colors">
+              FAQ
+            </Link>
+            <Link href="/about" className="hover:text-primary transition-colors">
+              About
+            </Link>
+          </div>
         </div>
       </nav>
 
-      {/* Content */}
-      <article className="max-w-4xl mx-auto px-4 py-12 prose prose-gray dark:prose-invert">
-        <h1>How to Use UniPreeti Converter</h1>
-        
-        <p className="lead">
-          UniPreeti is designed to be simple and intuitive. Follow these step-by-step instructions to convert your Nepali text between Unicode and Preeti encoding formats.
-        </p>
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 py-12">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Converter
+        </Link>
 
-        <h2>Method 1: Direct Text Input (Recommended)</h2>
-        
-        <h3>Converting Unicode to Preeti:</h3>
-        <ol>
-          <li>Open the UniPreeti homepage in your web browser</li>
-          <li>Locate the left text area labeled "Unicode Nepali"</li>
-          <li>Type or paste your Unicode Nepali text (e.g., नमस्ते, स्वागत छ)</li>
-          <li>The conversion happens automatically in real-time</li>
-          <li>The converted Preeti text appears instantly in the right text area</li>
-          <li>Click "Copy" to copy the result to your clipboard, or "Download" to save as a .txt file</li>
-        </ol>
-
-        <h3>Converting Preeti to Unicode:</h3>
-        <ol>
-          <li>Locate the right text area labeled "Preeti Font"</li>
-          <li>Type or paste your Preeti-encoded text</li>
-          <li>The Unicode conversion appears automatically in the left text area</li>
-          <li>Use the "Copy" or "Download" buttons to save your result</li>
-        </ol>
-
-        <h2>Method 2: File Upload</h2>
-        
-        <p>
-          If you have existing .txt files in Unicode or Preeti format, you can upload them directly:
-        </p>
-
-        <ol>
-          <li>Click the "Upload" button above either text area (Unicode or Preeti side)</li>
-          <li>Select your .txt file from your computer</li>
-          <li>The file content will be loaded automatically</li>
-          <li>Conversion happens instantly</li>
-          <li>Download the converted result using the "Download" button</li>
-        </ol>
-
-        <h2>Additional Features</h2>
-
-        <h3>Swap Button</h3>
-        <p>
-          Click the "Swap" button (with left-right arrows) to exchange the content between Unicode and Preeti text areas. This is useful when you want to reverse the conversion direction.
-        </p>
-
-        <h3>Clear All Button</h3>
-        <p>
-          Click "Clear All" to remove all text from both text areas and start fresh.
-        </p>
-
-        <h2>Tips for Best Results</h2>
-
-        <ul>
-          <li><strong>Use plain text:</strong> For best accuracy, use plain .txt files without formatting</li>
-          <li><strong>Check complex characters:</strong> Conjunct characters (क्ष, त्र, ज्ञ) and special combinations are handled automatically, but always verify critical documents</li>
-          <li><strong>Preserve English text:</strong> English letters, numbers, and punctuation remain unchanged during conversion</li>
-          <li><strong>Large documents:</strong> The converter can handle large documents, but for very large files (100+ pages), consider breaking them into smaller chunks</li>
-          <li><strong>Preview before finalizing:</strong> Always review the converted text, especially for important documents</li>
-        </ul>
-
-        <h2>Common Use Cases</h2>
-
-        <h3>For Government Offices:</h3>
-        <p>
-          Upload old Preeti documents, convert to Unicode, and publish on modern web portals. This ensures accessibility across all devices and platforms.
-        </p>
-
-        <h3>For Designers:</h3>
-        <p>
-          Convert legacy Preeti text from old design files to Unicode for use in modern design software and web projects.
-        </p>
-
-        <h3>For Students:</h3>
-        <p>
-          Convert research materials, historical documents, or study notes between formats as needed for different applications.
-        </p>
-
-        <h2>Troubleshooting</h2>
-
-        <h3>Text appears garbled:</h3>
-        <p>
-          Make sure you're converting in the correct direction. If Unicode text looks garbled, it might already be in Preeti format—try pasting it in the Preeti text area instead.
-        </p>
-
-        <h3>Some characters don't convert:</h3>
-        <p>
-          English text, numbers, and standard punctuation are preserved as-is. Only Nepali Devanagari characters are converted.
-        </p>
-
-        <h3>Copy button doesn't work:</h3>
-        <p>
-          Ensure your browser allows clipboard access. Modern browsers may require you to grant permission the first time.
-        </p>
-
-        <div className="bg-muted p-6 rounded-lg mt-8">
-          <h3 className="mt-0">Need More Help?</h3>
-          <p className="mb-0">
-            Check our <Link href="/faq" className="text-primary hover:underline">FAQ page</Link> for answers to common questions, or visit the <Link href="/about" className="text-primary hover:underline">About page</Link> to learn more about the project.
+        <div className="space-y-4 mb-12">
+          <h1 className="text-4xl font-bold">How to Use UniPreeti</h1>
+          <p className="text-lg text-muted-foreground">
+            Learn how to convert between Unicode Nepali and Preeti font in just a few simple steps.
           </p>
         </div>
-      </article>
+
+        {/* Quick Start */}
+        <div className="p-6 rounded-lg border bg-card shadow-sm mb-12">
+          <h2 className="text-2xl font-semibold mb-4">Quick Start</h2>
+          <ol className="space-y-4">
+            <li className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">1</span>
+              <div>
+                <h3 className="font-semibold mb-1">Choose Conversion Direction</h3>
+                <p className="text-sm text-muted-foreground">Select whether you want to convert from Unicode to Preeti or Preeti to Unicode using the tabs.</p>
+              </div>
+            </li>
+            <li className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">2</span>
+              <div>
+                <h3 className="font-semibold mb-1">Enter Your Text</h3>
+                <p className="text-sm text-muted-foreground">Type or paste your Nepali text in the left textarea. The conversion happens automatically in real-time.</p>
+              </div>
+            </li>
+            <li className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">3</span>
+              <div>
+                <h3 className="font-semibold mb-1">Get Your Result</h3>
+                <p className="text-sm text-muted-foreground">The converted text appears instantly in the right textarea. Copy it or download it as a file.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        {/* Features Guide */}
+        <div className="space-y-8">
+          <h2 className="text-3xl font-bold">Features Guide</h2>
+
+          {/* Feature Cards */}
+          <div className="grid gap-6">
+            {/* Type or Paste */}
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Keyboard className="w-6 h-6 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">Type or Paste Text</h3>
+                  <p className="text-muted-foreground">
+                    Simply type your Nepali text directly into the input area, or paste text from any source. The converter supports all Nepali Unicode characters and Preeti font characters.
+                  </p>
+                  <p className="text-sm text-muted-foreground italic">
+                    Tip: Use Ctrl+V (Windows) or Cmd+V (Mac) to paste text quickly.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Upload Files */}
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Upload className="w-6 h-6 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">Upload Text Files</h3>
+                  <p className="text-muted-foreground">
+                    Click the "Upload" button to select a .txt file from your computer. The file content will be loaded into the converter automatically. Perfect for batch processing multiple documents.
+                  </p>
+                  <p className="text-sm text-muted-foreground italic">
+                    Supported format: Plain text files (.txt) only.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Copy to Clipboard */}
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Copy className="w-6 h-6 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">Copy to Clipboard</h3>
+                  <p className="text-muted-foreground">
+                    Click the "Copy" button below the output area to copy the converted text to your clipboard. You can then paste it anywhere you need—Word documents, emails, websites, or social media.
+                  </p>
+                  <p className="text-sm text-muted-foreground italic">
+                    Shortcut: Click the copy icon for instant clipboard access.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Download Files */}
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Download className="w-6 h-6 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">Download as File</h3>
+                  <p className="text-muted-foreground">
+                    Click the "Download .txt" button to save the converted text as a plain text file on your computer. The file will be named with a timestamp for easy organization.
+                  </p>
+                  <p className="text-sm text-muted-foreground italic">
+                    Files are saved in UTF-8 encoding for maximum compatibility.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Swap Direction */}
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <RefreshCw className="w-6 h-6 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">Swap Conversion Direction</h3>
+                  <p className="text-muted-foreground">
+                    Click the swap button (⇄) in the middle to instantly switch between Unicode to Preeti and Preeti to Unicode conversion. Your text will be automatically converted in the new direction.
+                  </p>
+                  <p className="text-sm text-muted-foreground italic">
+                    Quick way to verify your conversion by converting back and forth.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Clear Text */}
+            <div className="p-6 rounded-lg border bg-card shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-6 h-6 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">Clear Text</h3>
+                  <p className="text-muted-foreground">
+                    Click the "Clear" button to remove all text from both input and output areas. This gives you a fresh start for your next conversion task.
+                  </p>
+                  <p className="text-sm text-muted-foreground italic">
+                    Useful when working with multiple documents in sequence.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tips Section */}
+        <div className="mt-12 p-6 rounded-lg bg-primary/5 border border-primary/20">
+          <h2 className="text-2xl font-semibold mb-4">Pro Tips</h2>
+          <ul className="space-y-3 text-muted-foreground">
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span>For best results when converting Preeti to Unicode, ensure your source text is properly formatted in Preeti font.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span>The converter handles complex Nepali conjuncts (क्ष, त्र, ज्ञ) and special characters automatically.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span>All conversion happens in your browser—no internet connection required after the page loads.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span>Your text is never uploaded to any server, ensuring complete privacy for sensitive documents.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary">•</span>
+              <span>Bookmark this page for quick access whenever you need to convert Nepali text.</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+          >
+            Start Converting Now
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t mt-20">
+        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
+          <p>© 2026 UniPreeti. Built with ❤️ for the Nepali community.</p>
+          <p className="mt-2">
+            Open source • Privacy-first • Always free
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

@@ -1,120 +1,154 @@
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronDown } from 'lucide-react';
 
 export default function FAQ() {
   const faqs = [
     {
       question: "What is the difference between Unicode and Preeti?",
-      answer: "Unicode is an international standard for encoding text that works across all devices and platforms. Preeti is a legacy font-based encoding system that requires the Preeti font to be installed. Unicode Nepali displays correctly everywhere, while Preeti text appears as random characters without the specific font."
+      answer: "Unicode is an international standard for encoding text that works across all devices and platforms. Preeti is a legacy Nepali font that uses custom ASCII encoding. Unicode Nepali can be displayed on any device without special fonts, while Preeti requires the Preeti font to be installed."
     },
     {
-      question: "Why do I need this converter?",
-      answer: "If you have old documents created with Preeti font, they won't display correctly on modern websites, mobile devices, or cloud platforms. Converting to Unicode ensures your content is accessible, searchable, and future-proof. Conversely, if you need to work with legacy systems that only support Preeti, you can convert Unicode text to Preeti format."
+      question: "Is my data safe when using UniPreeti?",
+      answer: "Absolutely! UniPreeti runs entirely in your web browser using JavaScript. Your text never leaves your computer or gets uploaded to any server. All conversion happens locally on your device, ensuring complete privacy for sensitive documents."
     },
     {
-      question: "Does UniPreeti handle conjuncts and matras correctly?",
-      answer: "Yes! UniPreeti uses advanced rule-based algorithms to handle complex Nepali typography including conjunct characters (क्ष, त्र, द्ध, ज्ञ), vowel signs (matras like ि, ी, ु, ू), half-forms, and special positioning rules. The converter is designed specifically for accurate Nepali text conversion."
+      question: "Do I need to install anything to use UniPreeti?",
+      answer: "No installation required! UniPreeti is a web-based tool that works directly in your browser. Simply visit the website and start converting. However, to view Preeti text properly, you'll need the Preeti font installed on your system."
     },
     {
-      question: "Is my data private and secure?",
-      answer: "Absolutely! UniPreeti runs entirely in your web browser using JavaScript. Your text never leaves your computer or gets uploaded to any server. This makes it perfect for sensitive documents like legal contracts, government records, or personal correspondence. We don't collect, store, or transmit any of your data."
+      question: "Can I convert large documents?",
+      answer: "Yes! UniPreeti can handle documents of any size. The conversion happens instantly in your browser, so there are no file size limits or processing delays. You can convert thousands of lines of text in seconds."
+    },
+    {
+      question: "What file formats are supported?",
+      answer: "UniPreeti currently supports plain text (.txt) files for upload and download. You can also copy and paste text from any source, including Word documents, PDFs, or websites."
+    },
+    {
+      question: "Why does my converted text look wrong?",
+      answer: "If converting from Preeti to Unicode, ensure your source text is properly formatted in Preeti font. If converting from Unicode to Preeti, make sure you have the Preeti font installed to view the output correctly. The converter handles complex Nepali typography automatically."
     },
     {
       question: "Can I use UniPreeti offline?",
-      answer: "Currently, you need an internet connection to load the website initially. However, once loaded, the conversion happens entirely in your browser without requiring internet access. We're working on adding Progressive Web App (PWA) support for full offline functionality in future updates."
-    },
-    {
-      question: "Are there any file size limits?",
-      answer: "UniPreeti can handle large documents, but performance depends on your device. Most modern computers can easily process documents with tens of thousands of characters instantly. For very large files (100+ pages), we recommend breaking them into smaller chunks for optimal performance."
-    },
-    {
-      question: "How accurate is the conversion for complex sentences?",
-      answer: "UniPreeti uses comprehensive character mapping and rule-based conversion that handles the vast majority of Nepali text accurately. However, because Preeti is not a standardized encoding (different versions exist), some rare edge cases might need manual review. We recommend always reviewing converted text for critical documents."
-    },
-    {
-      question: "What's the difference between Preeti, Kantipur, and other Nepali fonts?",
-      answer: "Preeti, Kantipur, and similar fonts are legacy font-based encoding systems that use different character mappings. Each requires its own specific converter. UniPreeti is specifically designed for Preeti font conversion. If you have text in Kantipur or other fonts, you'll need a different converter or may need to convert through multiple steps."
-    },
-    {
-      question: "How do I install the Preeti font on my computer?",
-      answer: "To view Preeti-encoded text with proper Nepali characters, you need to install the Preeti font on your system. Download the Preeti.ttf font file from a trusted source, then: On Windows, right-click the font file and select 'Install'. On Mac, double-click the font file and click 'Install Font'. On Linux, copy the font to ~/.fonts/ directory. After installation, restart your applications to use the font."
-    },
-    {
-      question: "Why does my converted text look like random characters?",
-      answer: "If converted Preeti text appears as random English characters and symbols, that's normal! Preeti encoding uses ASCII characters to represent Nepali letters. To see it as Nepali text, you need to apply the Preeti font in your word processor or text editor. In Unicode, the text displays correctly without any special font."
-    },
-    {
-      question: "Does UniPreeti work on mobile devices?",
-      answer: "Yes! UniPreeti is fully responsive and works on smartphones and tablets. The interface adapts to smaller screens, and all features including copy, paste, and file upload work on mobile browsers. However, file download functionality may vary depending on your mobile browser."
-    },
-    {
-      question: "Can I convert .docx or PDF files?",
-      answer: "Currently, UniPreeti supports .txt (plain text) files. For .docx or PDF files, you'll need to first copy the text content and paste it into the converter, or save the document as plain text. We're exploring adding direct .docx support in future updates."
-    },
-    {
-      question: "What happens to English text and numbers during conversion?",
-      answer: "English letters, numbers, and standard punctuation marks are preserved exactly as-is during conversion. Only Nepali Devanagari characters (अ-ह, vowel signs, etc.) are converted. This means mixed Nepali-English documents convert correctly with English portions remaining unchanged."
+      answer: "Once the page is loaded, UniPreeti works offline! The conversion engine runs entirely in your browser, so you don't need an internet connection to convert text. However, you'll need internet to initially load the website."
     },
     {
       question: "Is UniPreeti free to use?",
-      answer: "Yes, completely free! There are no hidden costs, no premium features, and no registration required. UniPreeti is built as a public service for the Nepali community. We believe essential tools for preserving and modernizing Nepali digital content should be accessible to everyone."
+      answer: "Yes, UniPreeti is completely free with no hidden costs, subscriptions, or premium features. We believe in providing accessible tools for the Nepali community without any barriers."
     },
     {
-      question: "Can I use UniPreeti for commercial projects?",
-      answer: "Absolutely! You can use UniPreeti for personal, educational, government, or commercial purposes without any restrictions. Whether you're a business digitizing records, a publisher converting content, or a freelancer working on client projects, feel free to use the tool as much as you need."
+      question: "How accurate is the conversion?",
+      answer: "UniPreeti uses advanced rule-based algorithms to handle complex Nepali typography including conjunct characters (क्ष, त्र, ज्ञ), vowel signs, and special positioning rules. The conversion is highly accurate for standard Nepali text."
     },
     {
-      question: "Will there be new features in the future?",
-      answer: "Yes! We're actively developing UniPreeti and plan to add features like: batch file conversion, .docx support, browser extension, offline PWA mode, conversion history, and support for other legacy Nepali fonts. Follow our updates or contribute to the project if you're a developer!"
+      question: "Can I convert text in both directions?",
+      answer: "Yes! UniPreeti supports bidirectional conversion. You can convert from Unicode to Preeti and from Preeti to Unicode. Simply use the tabs or swap button to change the conversion direction."
+    },
+    {
+      question: "What browsers are supported?",
+      answer: "UniPreeti works on all modern web browsers including Chrome, Firefox, Safari, Edge, and Opera. It's also mobile-friendly and works on smartphones and tablets."
+    },
+    {
+      question: "Do you collect any data?",
+      answer: "No! We don't collect, store, or transmit any of your text or personal data. UniPreeti is privacy-first by design. There are no analytics, tracking, or data collection of any kind."
+    },
+    {
+      question: "Can I use UniPreeti for commercial purposes?",
+      answer: "Yes! UniPreeti is free for both personal and commercial use. Government offices, businesses, educational institutions, and individuals can all use it without restrictions or licensing fees."
+    },
+    {
+      question: "How do I report a bug or suggest a feature?",
+      answer: "We welcome feedback! If you encounter any issues or have suggestions for improvements, please reach out through our contact channels. Your input helps us make UniPreeti better for everyone."
+    },
+    {
+      question: "Why was UniPreeti created?",
+      answer: "UniPreeti was created to help the Nepali community transition from legacy Preeti documents to modern Unicode standard. Many organizations and individuals have valuable content in Preeti format that needs to be accessible on modern platforms."
+    },
+    {
+      question: "Can I integrate UniPreeti into my own application?",
+      answer: "UniPreeti is open source! You can use the conversion engine in your own projects. Check our GitHub repository for documentation and integration guidelines."
     }
   ];
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Navigation */}
-      <nav className="border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Converter
+      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-xl font-bold text-primary hover:opacity-80 transition-opacity">
+            UniPreeti
           </Link>
+          <div className="flex gap-6 text-sm">
+            <Link href="/how-to-use" className="hover:text-primary transition-colors">
+              How to Use
+            </Link>
+            <Link href="/faq" className="text-primary font-medium">
+              FAQ
+            </Link>
+            <Link href="/about" className="hover:text-primary transition-colors">
+              About
+            </Link>
+          </div>
         </div>
       </nav>
 
-      {/* Content */}
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-        <p className="text-lg text-muted-foreground mb-12">
-          Find answers to common questions about UniPreeti, Unicode, Preeti font, and Nepali text conversion.
-        </p>
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 py-12">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Converter
+        </Link>
 
-        <div className="space-y-8">
+        <div className="space-y-4 mb-12">
+          <h1 className="text-4xl font-bold">Frequently Asked Questions</h1>
+          <p className="text-lg text-muted-foreground">
+            Find answers to common questions about UniPreeti and Nepali text conversion.
+          </p>
+        </div>
+
+        {/* FAQ List */}
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="border-b pb-8 last:border-b-0">
-              <h2 className="text-xl font-semibold mb-3 text-primary">
-                {index + 1}. {faq.question}
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
+            <details 
+              key={index}
+              className="group p-6 rounded-lg border bg-card shadow-sm hover:shadow-md transition-shadow"
+            >
+              <summary className="flex items-start justify-between cursor-pointer list-none">
+                <h3 className="font-semibold text-lg pr-8 group-open:text-primary transition-colors">
+                  {faq.question}
+                </h3>
+                <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
                 {faq.answer}
               </p>
-            </div>
+            </details>
           ))}
         </div>
 
-        <div className="bg-muted p-6 rounded-lg mt-12">
-          <h3 className="text-lg font-semibold mb-2">Still have questions?</h3>
-          <p className="text-muted-foreground">
-            If you couldn't find the answer you're looking for, check out our{' '}
-            <Link href="/how-to-use" className="text-primary hover:underline">
-              How to Use guide
-            </Link>{' '}
-            or learn more on the{' '}
-            <Link href="/about" className="text-primary hover:underline">
-              About page
-            </Link>.
+        {/* Still Have Questions */}
+        <div className="mt-12 p-8 rounded-lg bg-primary/5 border border-primary/20 text-center">
+          <h2 className="text-2xl font-semibold mb-3">Still Have Questions?</h2>
+          <p className="text-muted-foreground mb-6">
+            Can't find the answer you're looking for? We're here to help!
+          </p>
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+          >
+            Try UniPreeti Now
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t mt-20">
+        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
+          <p>© 2026 UniPreeti. Built with ❤️ for the Nepali community.</p>
+          <p className="mt-2">
+            Open source • Privacy-first • Always free
           </p>
         </div>
-      </article>
+      </footer>
     </main>
   );
 }
