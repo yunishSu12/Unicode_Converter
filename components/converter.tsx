@@ -18,24 +18,17 @@ import {
   Eye
 } from 'lucide-react';
 
+type ConversionMode = 'unicodeToPreeti' | 'preetiToUnicode';
+
 export default function Converter() {
-  const [unicodeText, setUnicodeText] = useState('');
-  const [preetiText, setPreetiText] = useState('');
-  const [copied, setCopied] = useState<'unicode' | 'preeti' | null>(null);
+  const [mode, setMode] = useState<ConversionMode>('unicodeToPreeti');
+  const [inputText, setInputText] = useState('');
+  const [outputText, setOutputText] = useState('');
+  const [copied, setCopied] = useState<'input' | 'output' | null>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isConverting, setIsConverting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Debounced conversion for real-time updates
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Auto-conversion happens here with debounce
-      setIsConverting(false);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [unicodeText, preetiText]);
 
   // Toggle dark mode
   useEffect(() => {
@@ -46,76 +39,71 @@ export default function Converter() {
     }
   }, [isDarkMode]);
 
-  // Convert Unicode to Preeti with debounce
-  const handleUnicodeChange = useCallback((value: string) => {
-    setUnicodeText(value);
+  // Convert text based on mode with debounce
+  const handleInputChange = useCallback((value: string) => {
+    setInputText(value);
     setIsConverting(true);
     setError(null);
     
     // Debounced conversion
     const timer = setTimeout(() => {
       try {
-        const converted = unicodeToPreeti(value);
-        setPreetiText(converted);
+        if (!value) {
+          setOutputText('');
+          setIsConverting(false);
+          return;
+        }
+        
+        const converted = mode === 'unicodeToPreeti' 
+          ? unicodeToPreeti(value)
+          : preetiToUnicode(value);
+        setOutputText(converted);
         setIsConverting(false);
+        setError(null);
       } catch (err) {
-        setError('Conversion error. Please try again.');
+        setError(`Conversion error: ${err instanceof Error ? err.message : 'Please try again.'}`);
         setIsConverting(false);
         console.error('Conversion error:', err);
       }
     }, 300);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  // Convert Preeti to Unicode with debounce
-  const handlePreetiChange = useCallback((value: string) => {
-    setPreetiText(value);
-    setIsConverting(true);
-    setError(null);
-    
-    // Debounced conversion
-    const timer = setTimeout(() => {
-      try {
-        const converted = preetiToUnicode(value);
-        setUnicodeText(converted);
-        setIsConverting(false);
-      } catch (err) {
-        setError('Conversion error. Please try again.');
-        setIsConverting(false);
-        console.error('Conversion error:', err);
-      }
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, []);
+  }, [mode]);
 
   // Manual convert button
   const handleManualConvert = () => {
-    if (unicodeText) {
-      const converted = unicodeToPreeti(unicodeText);
-      setPreetiText(converted);
-    } else if (preetiText) {
-      const converted = preetiToUnicode(preetiText);
-      setUnicodeText(converted);
+    if (inputText) {
+      try {
+        const converted = mode === 'unicodeToPreeti' 
+          ? unicodeToPreeti(inputText)
+          : preetiToUnicode(inputText);
+        setOutputText(converted);
+      } catch (err) {
+        setError('Conversion error. Please try again.');
+        console.error('Conversion error:', err);
+      }
     }
   };
 
-  // Swap texts
+  // Swap: interchange input/output AND switch mode
   const handleSwap = () => {
-    const temp = unicodeText;
-    setUnicodeText(preetiText);
-    setPreetiText(temp);
+    // Swap the text content
+    const temp = inputText;
+    setInputText(outputText);
+    setOutputText(temp);
+    
+    // Switch the conversion mode
+    setMode(mode === 'unicodeToPreeti' ? 'preetiToUnicode' : 'unicodeToPreeti');
   };
 
   // Clear all
   const handleClear = () => {
-    setUnicodeText('');
-    setPreetiText('');
+    setInputText('');
+    setOutputText('');
   };
 
   // Copy to clipboard
-  const handleCopy = async (text: string, type: 'unicode' | 'preeti') => {
+  const handleCopy = async (text: string, type: 'input' | 'output') => {
     const success = await copyToClipboard(text);
     if (success) {
       setCopied(type);
@@ -124,47 +112,80 @@ export default function Converter() {
   };
 
   // Download as file
-  const handleDownload = (text: string, type: 'unicode' | 'preeti') => {
-    const filename = `${type}-${Date.now()}.txt`;
+  const handleDownload = (text: string, type: 'input' | 'output') => {
+    const label = mode === 'unicodeToPreeti' 
+      ? (type === 'input' ? 'unicode' : 'preeti')
+      : (type === 'input' ? 'preeti' : 'unicode');
+    const filename = `${label}-${Date.now()}.txt`;
     downloadAsFile(text, filename);
   };
 
-  // Upload file (supports .txt and .docx)
-  const handleFileUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: 'unicode' | 'preeti'
-  ) => {
+  // Upload file (supports .txt and .doc)
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    console.log('File selected:', file.name, 'Type:', file.type, 'Size:', file.size);
 
     try {
       let content = '';
       
       // Handle .txt files
       if (file.name.endsWith('.txt')) {
+        console.log('Reading .txt file...');
         content = await readFileAsText(file);
+        console.log('Content length:', content.length);
       }
-      // Handle .docx files (basic support)
-      else if (file.name.endsWith('.docx')) {
-        // For now, show message that .docx needs to be converted to .txt first
-        alert('For .docx files, please copy the text and paste it directly, or save as .txt first. Full .docx support coming soon!');
+      // Handle .doc files (basic support - read as text)
+      else if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) {
+        console.log('Reading .doc/.docx file...');
+        // For .doc/.docx files, we can only read them as text if they're actually text-based
+        // Modern .docx are ZIP files, so this won't work perfectly
+        try {
+          content = await readFileAsText(file);
+          console.log('Content read, length:', content.length);
+          // If the content looks like binary (has lots of null characters), show error
+          if (content.includes('\0') || content.length === 0) {
+            alert('Binary .doc/.docx files cannot be read directly in the browser.\n\nPlease:\n1. Open your Word document\n2. Copy the text (Ctrl+A, Ctrl+C)\n3. Paste it directly into the text area\n\nOr save as .txt file first.');
+            e.target.value = '';
+            return;
+          }
+        } catch (err) {
+          console.error('Error reading doc file:', err);
+          alert('Cannot read this Word document format.\n\nPlease:\n1. Open your Word document\n2. Copy the text (Ctrl+A, Ctrl+C)\n3. Paste it directly into the text area\n\nOr save as .txt file first.');
+          e.target.value = '';
+          return;
+        }
+      } else {
+        alert('Please upload a .txt or .doc file.');
         e.target.value = '';
         return;
       }
       
-      if (type === 'unicode') {
-        handleUnicodeChange(content);
+      if (content) {
+        console.log('Setting input text...');
+        handleInputChange(content);
       } else {
-        handlePreetiChange(content);
+        alert('The file appears to be empty.');
       }
     } catch (error) {
       console.error('Error reading file:', error);
-      alert('Error reading file. Please try again.');
+      alert('Error reading file. Please try again or paste the text directly.');
     }
     
     // Reset input
     e.target.value = '';
   };
+
+  // Get labels based on current mode
+  const inputLabel = mode === 'unicodeToPreeti' ? 'Unicode Nepali' : 'Preeti Font';
+  const outputLabel = mode === 'unicodeToPreeti' ? 'Preeti Font' : 'Unicode Nepali';
+  const inputPlaceholder = mode === 'unicodeToPreeti' 
+    ? 'यहाँ युनिकोड नेपाली टाइप गर्नुहोस्...'
+    : 'Type Preeti encoded text here...';
+  const outputPlaceholder = mode === 'unicodeToPreeti'
+    ? 'Preeti output will appear here...'
+    : 'युनिकोड आउटपुट यहाँ देखिनेछ...';
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4 space-y-6">
@@ -193,47 +214,47 @@ export default function Converter() {
 
       {/* Converter Grid */}
       <div className="grid md:grid-cols-2 gap-4">
-        {/* Unicode Side */}
+        {/* Input Side */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Unicode Nepali</h2>
+            <h2 className="text-lg font-semibold">{inputLabel}</h2>
             <div className="flex gap-2">
-              <label htmlFor="unicode-upload">
-                <Button variant="outline" size="sm" type="button" className="cursor-pointer">
-                  <Upload className="w-4 h-4" />
-                  Upload
-                </Button>
-              </label>
               <input
-                id="unicode-upload"
+                id="file-upload"
                 type="file"
-                accept=".txt,.docx"
+                accept=".txt,.doc,.docx"
                 className="hidden"
-                onChange={(e) => handleFileUpload(e, 'unicode')}
+                onChange={handleFileUpload}
               />
+              <Button 
+                variant="outline" 
+                size="sm" 
+                type="button" 
+                onClick={() => document.getElementById('file-upload')?.click()}
+                className="cursor-pointer"
+              >
+                <Upload className="w-4 h-4" />
+                Upload
+              </Button>
             </div>
           </div>
           
           <Textarea
-            value={unicodeText}
-            onChange={(e) => handleUnicodeChange(e.target.value)}
-            placeholder="यहाँ युनिकोड नेपाली टाइप गर्नुहोस्..."
+            value={inputText}
+            onChange={(e) => handleInputChange(e.target.value)}
+            placeholder={inputPlaceholder}
             className="min-h-[300px] font-mono text-base"
-            aria-label="Unicode Nepali input"
-            aria-describedby="unicode-help"
+            aria-label={`${inputLabel} input`}
           />
-          <p id="unicode-help" className="sr-only">
-            Type or paste Unicode Nepali text here. Conversion happens automatically.
-          </p>
           
           <div className="flex gap-2 flex-wrap">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleCopy(unicodeText, 'unicode')}
-              disabled={!unicodeText}
+              onClick={() => handleCopy(inputText, 'input')}
+              disabled={!inputText}
             >
-              {copied === 'unicode' ? (
+              {copied === 'input' ? (
                 <CheckCircle2 className="w-4 h-4" />
               ) : (
                 <Copy className="w-4 h-4" />
@@ -243,8 +264,8 @@ export default function Converter() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleDownload(unicodeText, 'unicode')}
-              disabled={!unicodeText}
+              onClick={() => handleDownload(inputText, 'input')}
+              disabled={!inputText}
             >
               <Download className="w-4 h-4" />
               Download .txt
@@ -252,47 +273,29 @@ export default function Converter() {
           </div>
         </div>
 
-        {/* Preeti Side */}
+        {/* Output Side */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Preeti Font</h2>
-            <div className="flex gap-2">
-              <label htmlFor="preeti-upload">
-                <Button variant="outline" size="sm" type="button" className="cursor-pointer">
-                  <Upload className="w-4 h-4" />
-                  Upload
-                </Button>
-              </label>
-              <input
-                id="preeti-upload"
-                type="file"
-                accept=".txt,.docx"
-                className="hidden"
-                onChange={(e) => handleFileUpload(e, 'preeti')}
-              />
-            </div>
+            <h2 className="text-lg font-semibold">{outputLabel}</h2>
+            <div className="h-9"></div> {/* Spacer for alignment */}
           </div>
           
           <Textarea
-            value={preetiText}
-            onChange={(e) => handlePreetiChange(e.target.value)}
-            placeholder="Type Preeti encoded text here..."
-            className="min-h-[300px] font-mono text-base"
-            aria-label="Preeti font encoded text input"
-            aria-describedby="preeti-help"
+            value={outputText}
+            readOnly
+            placeholder={outputPlaceholder}
+            className="min-h-[300px] font-mono text-base bg-muted/50"
+            aria-label={`${outputLabel} output`}
           />
-          <p id="preeti-help" className="sr-only">
-            Type or paste Preeti encoded text here. Conversion to Unicode happens automatically.
-          </p>
           
           <div className="flex gap-2 flex-wrap">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleCopy(preetiText, 'preeti')}
-              disabled={!preetiText}
+              onClick={() => handleCopy(outputText, 'output')}
+              disabled={!outputText}
             >
-              {copied === 'preeti' ? (
+              {copied === 'output' ? (
                 <CheckCircle2 className="w-4 h-4" />
               ) : (
                 <Copy className="w-4 h-4" />
@@ -302,8 +305,8 @@ export default function Converter() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleDownload(preetiText, 'preeti')}
-              disabled={!preetiText}
+              onClick={() => handleDownload(outputText, 'output')}
+              disabled={!outputText}
             >
               <Download className="w-4 h-4" />
               Download .txt
@@ -316,36 +319,41 @@ export default function Converter() {
       <div className="flex justify-center gap-3 flex-wrap">
         <Button 
           onClick={handleManualConvert} 
-          disabled={!unicodeText && !preetiText}
+          disabled={!inputText}
           className="gap-2"
         >
           <RefreshCw className="w-4 h-4" />
           Convert
         </Button>
-        <Button onClick={handleSwap} disabled={!unicodeText && !preetiText} variant="outline">
+        <Button 
+          onClick={handleSwap} 
+          variant="outline"
+          title="Swap input and output, and switch conversion direction"
+        >
           <ArrowLeftRight className="w-4 h-4" />
           Swap
         </Button>
         <Button
           variant="outline"
           onClick={handleClear}
-          disabled={!unicodeText && !preetiText}
+          disabled={!inputText && !outputText}
         >
           <Trash2 className="w-4 h-4" />
           Clear All
         </Button>
-        <Button
-          variant="outline"
-          onClick={() => setShowPreview(!showPreview)}
-          disabled={!preetiText}
-        >
-          <Eye className="w-4 h-4" />
-          {showPreview ? 'Hide' : 'Show'} Preview
-        </Button>
+        {mode === 'unicodeToPreeti' && (
+          <Button
+            variant="outline"
+            onClick={() => setShowPreview(!showPreview)}
+          >
+            <Eye className="w-4 h-4" />
+            {showPreview ? 'Hide' : 'Show'} Preview
+          </Button>
+        )}
       </div>
 
-      {/* Live Preview Box */}
-      {showPreview && preetiText && (
+      {/* Live Preview Box (only for Unicode to Preeti mode) */}
+      {showPreview && mode === 'unicodeToPreeti' && (
         <div className="border rounded-lg p-6 bg-card">
           <h3 className="text-lg font-semibold mb-3">Preeti Font Preview</h3>
           <p className="text-sm text-muted-foreground mb-4">
@@ -356,8 +364,13 @@ export default function Converter() {
             className="p-4 bg-background border rounded min-h-[100px] whitespace-pre-wrap break-words"
             style={{ fontFamily: 'Preeti, monospace', fontSize: '16px' }}
           >
-            {preetiText || 'No Preeti text to preview'}
+            {outputText || "g]kfnL o'lgsf]8 / k|Llt kmg\\6df n]v\\g n]v\\g'; 86 sd k|of]u ug{'xf];\\ Û"}
           </div>
+          {!outputText && (
+            <p className="text-xs text-muted-foreground mt-2 italic">
+              Example text: "नेपाली युनिकोड र प्रीति फन्टमा लेख्न लेख्नुस डट कम प्रयोग गर्नुहोस् !"
+            </p>
+          )}
           <p className="text-xs text-muted-foreground mt-2">
             Note: You need the Preeti font installed to see this correctly. Without it, you'll see ASCII characters.
           </p>

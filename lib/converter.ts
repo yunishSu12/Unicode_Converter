@@ -1,5 +1,4 @@
-// converter.ts
-import { unicodeToPreetiMap } from './mapping';
+import { unicodeToPreetiMap, preetiToUnicodeMap, preetiVariations } from './mapping';
 import { getAllMappings } from './enhanced-mappings';
 
 export function unicodeToPreeti(text: string): string {
@@ -40,6 +39,59 @@ export function unicodeToPreeti(text: string): string {
       i++;
     }
   }
+  return result;
+}
+
+export function preetiToUnicode(text: string): string {
+  if (!text) return '';
+  
+  let result = '';
+  let i = 0;
+  
+  while (i < text.length) {
+    let matched = false;
+    
+    // Try to match longer sequences first (up to 4 characters)
+    for (let len = Math.min(4, text.length - i); len >= 1; len--) {
+      const substr = text.substring(i, i + len);
+      
+      // Check main reverse mapping
+      if (preetiToUnicodeMap[substr]) {
+        result += preetiToUnicodeMap[substr];
+        i += len;
+        matched = true;
+        break;
+      }
+      
+      // Check variations
+      if (preetiVariations[substr]) {
+        result += preetiVariations[substr];
+        i += len;
+        matched = true;
+        break;
+      }
+    }
+    
+    // If no match found, keep the character as-is
+    if (!matched) {
+      result += text[i];
+      i++;
+    }
+  }
+  
+  // Apply post-processing for Preeti to Unicode
+  // Reorder i-matra back to Unicode position
+  // In Preeti: l + consonant
+  // In Unicode: consonant + ि
+  const unicodeConsonants = '[\u0915-\u0939]';
+  const regex = new RegExp(`\u093F(${unicodeConsonants}+)`, 'g');
+  result = result.replace(regex, '$1\u093F');
+  
+  // Normalize to NFC
+  if (typeof result.normalize === 'function') {
+    result = result.normalize('NFC');
+  }
+  
   return result;
 }
 
