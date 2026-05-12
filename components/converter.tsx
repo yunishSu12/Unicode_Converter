@@ -354,15 +354,6 @@ export default function Converter() {
         )}
       </div>
 
-      {/* Font Display Info */}
-      {mode === 'unicodeToPreeti' && (
-        <div className="text-center text-sm bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 rounded-md">
-          <p className="text-blue-900 dark:text-blue-100">
-            <strong>Note:</strong> The output displays with Preeti font. If you see ASCII codes, please add the Preeti.ttf font file to <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">public/fonts/</code> folder and restart the server.
-          </p>
-        </div>
-      )}
-
       {/* Live Preview Box (only for Unicode to Preeti mode) */}
       {showPreview && mode === 'unicodeToPreeti' && (
         <div className="border rounded-lg p-6 bg-card">
