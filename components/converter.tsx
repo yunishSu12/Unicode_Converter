@@ -244,6 +244,7 @@ export default function Converter() {
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder={inputPlaceholder}
             className="min-h-[300px] font-mono text-base"
+            style={mode === 'preetiToUnicode' ? { fontFamily: 'Preeti, monospace' } : {}}
             aria-label={`${inputLabel} input`}
           />
           
@@ -285,6 +286,7 @@ export default function Converter() {
             readOnly
             placeholder={outputPlaceholder}
             className="min-h-[300px] font-mono text-base bg-muted/50"
+            style={mode === 'unicodeToPreeti' ? { fontFamily: 'Preeti, monospace' } : {}}
             aria-label={`${outputLabel} output`}
           />
           
@@ -351,6 +353,13 @@ export default function Converter() {
           </Button>
         )}
       </div>
+
+      {/* Font Display Info */}
+      {mode === 'unicodeToPreeti' && (
+        <div className="text-center text-sm text-muted-foreground bg-muted/30 p-3 rounded-md">
+          💡 The output box displays text with Preeti font applied. Install the Preeti font on your system to see proper Nepali characters instead of ASCII codes.
+        </div>
+      )}
 
       {/* Live Preview Box (only for Unicode to Preeti mode) */}
       {showPreview && mode === 'unicodeToPreeti' && (
