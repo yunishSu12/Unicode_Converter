@@ -243,8 +243,8 @@ export default function Converter() {
             value={inputText}
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder={inputPlaceholder}
-            className="min-h-[300px] font-mono text-base"
-            style={mode === 'preetiToUnicode' ? { fontFamily: 'Preeti, monospace' } : {}}
+            className="min-h-[300px] text-base"
+            style={mode === 'preetiToUnicode' ? { fontFamily: 'Preeti, monospace', fontSize: '18px', lineHeight: '1.6' } : { fontFamily: 'monospace' }}
             aria-label={`${inputLabel} input`}
           />
           
@@ -285,8 +285,8 @@ export default function Converter() {
             value={outputText}
             readOnly
             placeholder={outputPlaceholder}
-            className="min-h-[300px] font-mono text-base bg-muted/50"
-            style={mode === 'unicodeToPreeti' ? { fontFamily: 'Preeti, monospace' } : {}}
+            className="min-h-[300px] text-base bg-muted/50"
+            style={mode === 'unicodeToPreeti' ? { fontFamily: 'Preeti, monospace', fontSize: '18px', lineHeight: '1.6' } : { fontFamily: 'monospace' }}
             aria-label={`${outputLabel} output`}
           />
           
@@ -356,8 +356,17 @@ export default function Converter() {
 
       {/* Font Display Info */}
       {mode === 'unicodeToPreeti' && (
-        <div className="text-center text-sm text-muted-foreground bg-muted/30 p-3 rounded-md">
-          💡 The output box displays text with Preeti font applied. Install the Preeti font on your system to see proper Nepali characters instead of ASCII codes.
+        <div className="text-center text-sm bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 rounded-md">
+          <p className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
+            📝 Preeti Font Display
+          </p>
+          <p className="text-amber-800 dark:text-amber-200">
+            The output box uses Preeti font to display Nepali text. If you see ASCII codes instead of Nepali characters, 
+            you need to <a href="https://www.fontspace.com/preeti-font-f3384" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-amber-600">download and install the Preeti font</a> on your system.
+          </p>
+          <p className="text-xs text-amber-700 dark:text-amber-300 mt-2">
+            After installing, refresh this page to see proper Nepali characters.
+          </p>
         </div>
       )}
 
