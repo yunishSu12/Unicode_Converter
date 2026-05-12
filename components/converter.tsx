@@ -356,16 +356,9 @@ export default function Converter() {
 
       {/* Font Display Info */}
       {mode === 'unicodeToPreeti' && (
-        <div className="text-center text-sm bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 rounded-md">
-          <p className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
-            📝 Preeti Font Display
-          </p>
-          <p className="text-amber-800 dark:text-amber-200">
-            The output box uses Preeti font to display Nepali text. If you see ASCII codes instead of Nepali characters, 
-            you need to <a href="https://www.fontspace.com/preeti-font-f3384" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-amber-600">download and install the Preeti font</a> on your system.
-          </p>
-          <p className="text-xs text-amber-700 dark:text-amber-300 mt-2">
-            After installing, refresh this page to see proper Nepali characters.
+        <div className="text-center text-sm bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 rounded-md">
+          <p className="text-blue-900 dark:text-blue-100">
+            <strong>Note:</strong> The output displays with Preeti font. If you see ASCII codes, please add the Preeti.ttf font file to <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">public/fonts/</code> folder and restart the server.
           </p>
         </div>
       )}
