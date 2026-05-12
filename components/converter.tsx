@@ -244,7 +244,7 @@ export default function Converter() {
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder={inputPlaceholder}
             className="min-h-[300px] text-base"
-            style={mode === 'preetiToUnicode' ? { fontFamily: 'Preeti, monospace', fontSize: '22px', lineHeight: '1.3' } : { fontFamily: 'monospace' }}
+            style={mode === 'preetiToUnicode' ? { fontFamily: 'Preeti, monospace', fontSize: '22px', lineHeight: '1.3', letterSpacing: '-0.5px', wordSpacing: '-2px' } : { fontFamily: 'monospace' }}
             aria-label={`${inputLabel} input`}
           />
           
@@ -286,7 +286,7 @@ export default function Converter() {
             readOnly
             placeholder={outputPlaceholder}
             className="min-h-[300px] text-base bg-muted/50"
-            style={mode === 'unicodeToPreeti' ? { fontFamily: 'Preeti, monospace', fontSize: '22px', lineHeight: '1.3' } : { fontFamily: 'monospace' }}
+            style={mode === 'unicodeToPreeti' ? { fontFamily: 'Preeti, monospace', fontSize: '22px', lineHeight: '1.3', letterSpacing: '-0.5px', wordSpacing: '-2px' } : { fontFamily: 'monospace' }}
             aria-label={`${outputLabel} output`}
           />
           
