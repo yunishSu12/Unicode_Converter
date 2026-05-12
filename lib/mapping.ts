@@ -1,105 +1,33 @@
-// Unicode to Preeti character mapping
-// Reverse-engineered from https://github.com/Shuvayatra/preeti
-
+// mapping.ts
 export const unicodeToPreetiMap: Record<string, string> = {
   // Vowels
-  '\u0905': 'c',      // अ
-  '\u0906': 'cf',     // आ
-  '\u0907': 'O',      // इ
-  '\u0908': 'O{',     // ई
-  '\u0909': 'p',      // उ
-  '\u090A': 'pm',     // ऊ
-  '\u090B': 'C',      // ऋ
-  '\u090F': 'P',      // ए
-  '\u0910': 'P]',     // ऐ
-  '\u0913': 'cf]',    // ओ
-  '\u0914': 'cf}',    // औ
+  '\u0905': 'c', '\u0906': 'cf', '\u0907': 'O', '\u0908': 'O{',
+  '\u0909': 'p', '\u090A': 'pm', '\u090B': 'C', '\u090F': 'P',
+  '\u0910': 'P]', '\u0913': 'cf]', '\u0914': 'cf}',
   
-  // Consonants
-  '\u0915': 's',      // क
-  '\u0916': 'v',      // ख
-  '\u0917': 'u',      // ग
-  '\u0918': '3',      // घ
-  '\u0919': '\u00AA', // ङ
-  '\u091A': 'r',      // च
-  '\u091B': '5',      // छ
-  '\u091C': 'h',      // ज
-  '\u091D': '\u00B4', // झ
-  '\u091E': '`',      // ञ
-  '\u091F': '6',      // ट
-  '\u0920': '7',      // ठ
-  '\u0921': '8',      // ड
-  '\u0922': '9',      // ढ
-  '\u0923': '0f',     // ण
-  '\u0924': 't',      // त
-  '\u0925': 'y',      // थ
-  '\u0926': 'b',      // द
-  '\u0927': 'w',      // ध
-  '\u0928': 'g',      // न
-  '\u092A': 'k',      // प
-  '\u092B': 'km',     // फ
-  '\u092C': 'a',      // ब
-  '\u092D': 'e',      // भ
-  '\u092E': 'd',      // म
-  '\u092F': 'o',      // य
-  '\u0930': '/',      // र
-  '\u0932': 'n',      // ल
-  '\u0935': 'j',      // व
-  '\u0936': 'z',      // श
-  '\u0937': 'if',     // ष
-  '\u0938': ';',      // स
-  '\u0939': 'x',      // ह
-  
-  // Matras (vowel signs)
-  '\u093E': 'f',      // ा
-  '\u093F': 'l',      // ि
-  '\u0940': 'L',      // ी
-  '\u0941': "'",      // ु
-  '\u0942': '"',      // ू
-  '\u0943': '[',      // ृ
-  '\u0947': ']',      // े
-  '\u0948': '}',      // ै
-  '\u094B': 'f]',     // ो
-  '\u094C': 'f}',     // ौ
-  
-  // Other marks
-  '\u0902': '+',      // ं (anusvara)
-  '\u0901': 'F',      // ँ (chandrabindu)
-  '\u0903': 'M',      // ः (visarga)
-  '\u094D': '',       // ् (halant) - handled in conjuncts
-  
+  // Consonants (Full letters)
+  '\u0915': 's', '\u0916': 'v', '\u0917': 'u', '\u0918': '3', '\u0919': 'ª',
+  '\u091A': 'r', '\u091B': '5', '\u091C': 'h', '\u091D': '´', '\u091E': '`',
+  '\u091F': '6', '\u0920': '7', '\u0921': '8', '\u0922': '9', '\u0923': '0',
+  '\u0924': 't', '\u0925': 'y', '\u0926': 'b', '\u0927': 'w', '\u0928': 'g',
+  '\u092A': 'k', '\u092B': 'km', '\u092C': 'a', '\u092D': 'e', '\u092E': 'd',
+  '\u092F': 'o', '\u0930': '/', '\u0932': 'n', '\u0935': 'j', '\u0936': 'z',
+  '\u0937': 'i', '\u0938': ';', '\u0939': 'x',
+
+  // Matras
+  '\u093E': 'f', '\u093F': 'l', '\u0940': 'L', '\u0941': "'", '\u0942': '"',
+  '\u0943': '[', '\u0947': ']', '\u0948': '}', '\u094B': 'f]', '\u094C': 'f}',
+
+  // Marks
+  '\u0902': '+', '\u0901': 'F', '\u0903': 'M',
+  '\u094D': '', // Halant (Handled by greedy matching in enhanced-mappings)
+
   // Numbers
-  '\u0966': ')',      // ०
-  '\u0967': '!',      // १
-  '\u0968': '@',      // २
-  '\u0969': '#',      // ३
-  '\u096A': '$',      // ४
-  '\u096B': '%',      // ५
-  '\u096C': '^',      // ६
-  '\u096D': '&',      // ७
-  '\u096E': '*',      // ८
-  '\u096F': '(',      // ९
-  
-  // Punctuation
-  '\u0964': '.',      // ।
-  '\u0965': '..',     // ॥
-  
-  // Common conjuncts
-  '\u0915\u094D\u0937': 'If',     // क्ष
-  '\u0924\u094D\u0930': 'q',      // त्र
-  '\u091C\u094D\u091E': '1',      // ज्ञ
-  '\u0936\u094D\u0930': '>',      // श्र
+  '\u0966': ')', '\u0967': '!', '\u0968': '@', '\u0969': '#', '\u096A': '$',
+  '\u096B': '%', '\u096C': '^', '\u096D': '&', '\u096E': '*', '\u096F': '(',
+  '\u0964': '.', '\u0965': '..'
 };
 
-// Reverse mapping for Preeti to Unicode
 export const preetiToUnicodeMap: Record<string, string> = {};
-
-// Build reverse map
-Object.entries(unicodeToPreetiMap).forEach(([unicode, preeti]) => {
-  if (preeti && (!preetiToUnicodeMap[preeti] || unicode.length > preetiToUnicodeMap[preeti].length)) {
-    preetiToUnicodeMap[preeti] = unicode;
-  }
-});
-
-// Additional variations
+Object.entries(unicodeToPreetiMap).forEach(([u, p]) => { if (p) preetiToUnicodeMap[p] = u; });
 export const preetiVariations: Record<string, string> = {};
