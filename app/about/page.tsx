@@ -57,10 +57,10 @@ export default function About() {
         <div className="space-y-6 mb-12">
           <h2 className="text-3xl font-bold">The Problem We're Solving</h2>
           <p className="text-muted-foreground leading-relaxed">
-            For over two decades, Nepali computer users relied on the Preeti font for digital Nepali text. Government offices, educational institutions, legal firms, publishing houses, and countless individuals created millions of documents using this legacy encoding system. While Preeti served its purpose well in the pre-Unicode era, it has significant limitations in today's interconnected digital world.
+            For over two decades, Nepali computer users relied on the Preeti font for digital Nepali text. Government offices, educational institutions, legal firms, publishing houses, and countless individuals created millions of documents using this legacy encoding system. While Preeti served its purpose well in the pre-Unicode era, it has significant limitations in today&apos;s interconnected digital world.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Preeti documents cannot be properly displayed on modern websites without special fonts installed. They don't work on mobile devices, can't be indexed by search engines, aren't accessible to screen readers, and create compatibility issues across different platforms. This has created a digital divide, where valuable Nepali content remains trapped in an outdated format.
+            Preeti documents cannot be properly displayed on modern websites without special fonts installed. They don&apos;t work on mobile devices, can&apos;t be indexed by search engines, aren&apos;t accessible to screen readers, and create compatibility issues across different platforms. This has created a digital divide, where valuable Nepali content remains trapped in an outdated format.
           </p>
           <p className="text-muted-foreground leading-relaxed">
             Unicode Nepali, on the other hand, is the international standard that works seamlessly everywhere—from smartphones to government portals, from social media to cloud documents. Converting from Preeti to Unicode is essential for digital preservation, accessibility, and the future of Nepali content online.
@@ -209,7 +209,7 @@ export default function About() {
             <div className="p-6 rounded-lg border bg-card shadow-sm">
               <h3 className="font-semibold text-xl mb-2">Open Source</h3>
               <p className="text-muted-foreground">
-                We believe in transparency and community collaboration. UniPreeti's code is open source, allowing developers to learn from, improve, and integrate our conversion engine.
+                We believe in transparency and community collaboration. UniPreeti&apos;s code is open source, allowing developers to learn from, improve, and integrate our conversion engine.
               </p>
             </div>
 

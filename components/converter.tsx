@@ -146,14 +146,14 @@ export default function Converter() {
           console.log('Content read, length:', content.length);
           // If the content looks like binary (has lots of null characters), show error
           if (content.includes('\0') || content.length === 0) {
-            alert('Binary .doc/.docx files cannot be read directly in the browser.\n\nPlease:\n1. Open your Word document\n2. Copy the text (Ctrl+A, Ctrl+C)\n3. Paste it directly into the text area\n\nOr save as .txt file first.');
-            e.target.value = '';
+            alert(&apos;Binary .doc/.docx files cannot be read directly in the browser.\n\nPlease:\n1. Open your Word document\n2. Copy the text (Ctrl+A, Ctrl+C)\n3. Paste it directly into the text area\n\nOr save as .txt file first.&apos;);
+            e.target.value = &apos;&apos;;
             return;
           }
         } catch (err) {
-          console.error('Error reading doc file:', err);
-          alert('Cannot read this Word document format.\n\nPlease:\n1. Open your Word document\n2. Copy the text (Ctrl+A, Ctrl+C)\n3. Paste it directly into the text area\n\nOr save as .txt file first.');
-          e.target.value = '';
+          console.error(&apos;Error reading doc file:&apos;, err);
+          alert(&apos;Cannot read this Word document format.\n\nPlease:\n1. Open your Word document\n2. Copy the text (Ctrl+A, Ctrl+C)\n3. Paste it directly into the text area\n\nOr save as .txt file first.&apos;);
+          e.target.value = &apos;&apos;;
           return;
         }
       } else {
@@ -364,7 +364,7 @@ export default function Converter() {
             className="p-4 bg-background border rounded min-h-[100px] whitespace-pre-wrap break-words"
             style={{ fontFamily: 'Preeti, monospace', fontSize: '16px' }}
           >
-            {outputText || "g]kfnL o'lgsf]8 / k|Llt kmg\\6df n]v\\g n]v\\g'; 86 sd k|of]u ug{'xf];\\ Û"}
+            {outputText || &quot;g]kfnL o&apos;lgsf]8 / k|Llt kmg\\6df n]v\\g n]v\\g&apos;; 86 sd k|of]u ug{&apos;xf];\\ Û&quot;}
           </div>
           {!outputText && (
             <p className="text-xs text-muted-foreground mt-2 italic">

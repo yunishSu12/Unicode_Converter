@@ -35,7 +35,7 @@ export default function Home() {
             Why UniPreeti?
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            UniPreeti is a powerful, fast, and completely private tool designed to bridge the gap between legacy Preeti font documents and modern Unicode Nepali text. Whether you're a government office digitizing old records, a designer working with legacy files, a student converting research materials, or a lawyer handling historical documents, UniPreeti makes the conversion process instant and accurate.
+            UniPreeti is a powerful, fast, and completely private tool designed to bridge the gap between legacy Preeti font documents and modern Unicode Nepali text. Whether you&apos;re a government office digitizing old records, a designer working with legacy files, a student converting research materials, or a lawyer handling historical documents, UniPreeti makes the conversion process instant and accurate.
           </p>
         </div>
 

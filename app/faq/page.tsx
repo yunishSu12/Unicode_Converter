@@ -13,7 +13,7 @@ export default function FAQ() {
     },
     {
       question: "Do I need to install anything to use UniPreeti?",
-      answer: "No installation required! UniPreeti is a web-based tool that works directly in your browser. Simply visit the website and start converting. However, to view Preeti text properly, you'll need the Preeti font installed on your system."
+      answer: "No installation required! UniPreeti is a web-based tool that works directly in your browser. Simply visit the website and start converting. However, to view Preeti text properly, you&apos;ll need the Preeti font installed on your system."
     },
     {
       question: "Can I convert large documents?",

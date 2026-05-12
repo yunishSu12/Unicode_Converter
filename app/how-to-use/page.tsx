@@ -99,7 +99,7 @@ export default function HowToUse() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold">Upload Text Files</h3>
                   <p className="text-muted-foreground">
-                    Click the "Upload" button to select a .txt file from your computer. The file content will be loaded into the converter automatically. Perfect for batch processing multiple documents.
+                    Click the &quot;Upload&quot; button to select a .txt file from your computer. The file content will be loaded into the converter automatically. Perfect for batch processing multiple documents.
                   </p>
                   <p className="text-sm text-muted-foreground italic">
                     Supported format: Plain text files (.txt) only.
@@ -117,7 +117,7 @@ export default function HowToUse() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold">Copy to Clipboard</h3>
                   <p className="text-muted-foreground">
-                    Click the "Copy" button below the output area to copy the converted text to your clipboard. You can then paste it anywhere you need—Word documents, emails, websites, or social media.
+                    Click the &quot;Copy&quot; button below the output area to copy the converted text to your clipboard. You can then paste it anywhere you need—Word documents, emails, websites, or social media.
                   </p>
                   <p className="text-sm text-muted-foreground italic">
                     Shortcut: Click the copy icon for instant clipboard access.
@@ -135,7 +135,7 @@ export default function HowToUse() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold">Download as File</h3>
                   <p className="text-muted-foreground">
-                    Click the "Download .txt" button to save the converted text as a plain text file on your computer. The file will be named with a timestamp for easy organization.
+                    Click the &quot;Download .txt&quot; button to save the converted text as a plain text file on your computer. The file will be named with a timestamp for easy organization.
                   </p>
                   <p className="text-sm text-muted-foreground italic">
                     Files are saved in UTF-8 encoding for maximum compatibility.
@@ -171,7 +171,7 @@ export default function HowToUse() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold">Clear Text</h3>
                   <p className="text-muted-foreground">
-                    Click the "Clear" button to remove all text from both input and output areas. This gives you a fresh start for your next conversion task.
+                    Click the &quot;Clear&quot; button to remove all text from both input and output areas. This gives you a fresh start for your next conversion task.
                   </p>
                   <p className="text-sm text-muted-foreground italic">
                     Useful when working with multiple documents in sequence.
