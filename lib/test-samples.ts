@@ -36,7 +36,7 @@ export const testSamples = {
   // Complex sentence
   sentence: {
     unicode: 'यो युनिकोड नेपाली हो।',
-    expectedPreeti: 'of] o'lgskf]8 g]kfnL xf] .',
+    expectedPreeti: 'of] o\'lgskf]8 g]kfnL xf] .',
   },
   
   // With matras
