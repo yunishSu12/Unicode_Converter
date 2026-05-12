@@ -72,7 +72,7 @@ export const testSamples = {
   // Legal text
   legal: {
     unicode: 'संविधान अनुसार न्यायालय',
-    expectedPreeti: '+ljwfg cg';f/ Gofofno',
+    expectedPreeti: '+ljwfg cg\';f/ Gofofno',
   },
 };
 
