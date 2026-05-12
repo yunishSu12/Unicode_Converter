@@ -54,8 +54,7 @@ export const testSamples = {
   // Mixed content
   mixed: {
     unicode: 'नेपाल Nepal २०२४',
-    expectedPreeti: 'g]kfn Nepal @)@$'$',
-  },$',
+    expectedPreeti: 'g]kfn Nepal @)@$'
   },
   
   // Complex conjuncts
